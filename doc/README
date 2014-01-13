@@ -1,0 +1,33 @@
+Tripiccio extension for ezPublish 3.6.x, 4.x 
+
+Registers Users at TRIPPICCIO Newsletter Service - data is send from collected info to Trippiccio Newsletter Service
+
+Requirements:
+-------------
+- ezPublish 3.6.x or higher (tested with Community Project 2012.6)
+
+module.ini.append.php settings :
+================================
+[newsletter]
+required data to communicate with trippicccio services
+
+[variables]
+Mapping collected info fields to required fields of service
+tripiccio_feld=class_attribute_identifier collection/collected info
+field newsletter is required
+
+usage in template:
+===================
+{def $send=fetch( 'tripiccio', 'register', hash( collection, $collection.attributes))}
+
+$collection must be an object of ezinfocollection.
+
+{def $collection=cond( $collection_id, fetch( content, collected_info_collection, hash( collection_id, $collection_id ) ),
+                          fetch( content, collected_info_collection, hash( contentobject_id, $node.contentobject_id ) ) )}
+
+
+Installation: See, [doc/INSTALL.md](doc/INSTALL.md)
+
+changelog:
+v0.1 - first release  
+     - only registration is possible
